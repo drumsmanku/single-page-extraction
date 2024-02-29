@@ -40,7 +40,15 @@ const ProfilePopover = () => {
   const [open, setOpen] = useState(false);
   const upSm = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
- 
+  const handleMenuItem = path => {
+    navigate(path);
+    setOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return <Fragment>
       <StyledButtonBase disableRipple ref={anchorRef} onClick={() => setOpen(true)}>
@@ -85,15 +93,15 @@ const ProfilePopover = () => {
             </Box>
           </FlexBox>}>
         <Box pt={1}>
-          <StyledSmall >Set Status</StyledSmall>
+          <StyledSmall onClick={() => handleMenuItem('/dashboard/profile')}>Set Status</StyledSmall>
 
-          <StyledSmall >
+          <StyledSmall onClick={() => handleMenuItem('/dashboard/profile')}>
             Profile & Account
           </StyledSmall>
 
-          <StyledSmall >Settings</StyledSmall>
+          <StyledSmall onClick={() => handleMenuItem('/dashboard/account')}>Settings</StyledSmall>
 
-          <StyledSmall >
+          <StyledSmall onClick={() => handleMenuItem('/dashboard/team-member')}>
             Manage Team
           </StyledSmall>
 
@@ -102,7 +110,7 @@ const ProfilePopover = () => {
         }} />
 
           <StyledSmall onClick={() => {
-          
+          handleLogout();
           toast.error('You Logout Successfully');
         }}>
             Sign Out
